@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!-- External CSS -->
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    {% if qr_img_path %}
+    <div class="qrcode_container">
+        <div class="center">
+            <h2 class="text-center">Scan QR Code</h2>
+            <p>Scan QR code below using the Google Authenticator app:</p>
+            <a href="{{ url_for('login') }}" class="text-center">Click here to Login</a>
+        </div>
+        <div class="qr_code">
+            <img src="{{ qr_img_path }}" alt="qr_code">
+        </div>
+        <br>
+        <p class="text-center">Recovery Key: {{ recovery_key }}</p>
+    </div>
+    {% else %}
+    <div class="lr_container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <h2 class="text-center">Register</h2>
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <form action="/register" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+            <br>
+            <div class="text-center">
+                <label for="login">Already register account ?</label>
+                <a href="{{ url_for('login') }}">Login</a>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+</body>
+
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+This software is provided under the BSD License. Copyright (c) 2024 Xavier de Carné de Carnavalet.
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the original author is acknowledged. See JavaScript source for full license text.
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <!-- Bootstrap CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h2>Chat Application <small> - (<a href="/logout">Logout</a>)</small></h2>
+        <div class="chat-box">
+            <!-- Chat messages container -->
+            <div id="messages"
+                style="border:1px solid #ccc; height:300px; margin-bottom:20px; overflow-y:scroll; padding:10px;"></div>
+            <!-- User selection dropdown -->
+            <select id="userList" class="form-control mb-2">
+                <option value="-1" disabled selected><i>Choose a contact</i></option>
+                <!-- User options populated here -->
+            </select>
+            <!-- Message input -->
+            <textarea id="messageInput" class="form-control mb-2 .encryptMsg"
+                placeholder="Type a message..."></textarea>
+            <div class="d-flex justify-content-between">
+                <button onclick="sendMessage()" class="btn btn-primary">Send</button>
+                <div>
+                    <button onclick="refreshKeys()" class="btn btn-secondary btn-sm">Refresh Keys</button>
+                    <button onclick="eraseChat()" class="btn btn-danger btn-sm">Erase Chat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery for simplified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs"
+        crossorigin="anonymous"></script>
+        <script type="text/javascript">
+
+            // Global variables
+            var decryptCounter = {};
+            let lastMessageId = 0;
+            let peer_id = -1;
+            const myID = {{ sender_id }};
+            let userInfo = {};
+    
+            const message = {
+                salt: null,
+                iv: null,
+                ciphertext: null
+            };
+    
+            // Ctrl+Enter to send message
+            document.addEventListener('DOMContentLoaded', function () {
+                document.getElementById('messageInput').addEventListener('keydown', function (e) {
+                    if (e.ctrlKey && e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+            });
+    
+            // Send message function
+            async function sendMessage() {
+                if (peer_id == -1) return; // Exit if no peer selected
+                const message = document.getElementById('messageInput').value;
+                const { encryptedMessage, iv, signature } = await encryptFunction(peer_id, message);
+                const payload = {
+                    receiver_id: peer_id,
+                    message_text: encryptedMessage,
+                    iv,
+                    signature
+                };
+    
+                fetch('/send_message', {
+                    method: 'POST', // Specify the method
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            // If the server response is not OK, throw an error
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json(); // Parse JSON response from the server
+                    })
+                    .then(data => {
+                        console.log('Message sent:', data); // Log success message
+                        document.getElementById('messageInput').value = ''; // Clear the input after sending
+                    })
+                    .catch(error => {
+                        console.error('Error sending message:', error); // Log any errors
+                    });
+            }// generate key by ECDH and curve 
+            async function generateKey(peer_id, salt) {
+                const keyPair = await window.crypto.subtle.generateKey(
+                    {
+                        name: 'ECDH',
+                        namedCurve: 'P-384',
+                    },
+                    true,
+                    ['deriveBits'] // key usages
+                );
+    
+                const privateKey = await window.crypto.subtle.exportKey('jwk', keyPair.privateKey);
+                const publicKey = await window.crypto.subtle.exportKey('jwk', keyPair.publicKey);
+    
+                // convert key to string and store into local storage of HTML
+                PK = {
+                    "salt": salt,
+                    "privateKey": privateKey,
+                    "publicKey": publicKey
+                }
+                let keyCount = localStorage.getItem(peer_id + "-keycount") || 0;
+                localStorage.setItem(peer_id + "-keycount", ++keyCount);
+                localStorage.setItem(peer_id + "-" + keyCount, JSON.stringify(PK));
+    
+                return publicKey;
+            }
+    
+            async function retrieveKey(peer_id, keyID) { // retrieve key from local storage
+                const KeyCount = keyID || localStorage.getItem(peer_id + "-keycount");
+                const privateKeyJson = JSON.parse(localStorage.getItem(peer_id + "-" + KeyCount)).privateKey;
+                const salt = JSON.parse(localStorage.getItem(peer_id + "-" + KeyCount)).salt;
+                const privateKey = await window.crypto.subtle.importKey(
+                    'jwk',
+                    privateKeyJson,
+                    {
+                        name: 'ECDH',
+                        namedCurve: 'P-384',
+                    },
+                    true,
+                    ['deriveBits']
+                );
+    
+                const publicKeyJson = JSON.parse(localStorage.getItem(peer_id + "-" + KeyCount)).senderPublicKey;
+                const publicKey = await window.crypto.subtle.importKey(
+                    'jwk',
+                    publicKeyJson,
+                    {
+                        name: 'ECDH',
+                        namedCurve: 'P-384',
+                    },
+                    true,
+                    []
+                );
+    
+                console.log('retrieveKey: Private Key:');
+                console.log(privateKey);
+    
+                console.log('retreiveKey: Public Key:');
+                console.log(publicKey);
+    
+                return { privateKey, publicKey, salt };
+            }
+    
+            // derive Shared Secret
+            async function deriveSharedSecretKey(privateKey, publicKey) {
+                const secret = await window.crypto.subtle.deriveBits(
+                    { name: "ECDH", public: publicKey },
+                    privateKey,
+                    384
+                );
+                console.log("Secret:")
+                console.log(arrayBufferToText(secret))
+                return window.crypto.subtle.importKey(
+                    "raw",
+                    secret,
+                    { name: "HKDF" },
+                    false,
+                    ["deriveKey"]
+                );
+            }
+    
+            // perform the key exchange 
+            async function shareKey(from_id, to_id, keyID) {
+                // generate key pairs for Alice and Bob
+                const { privateKey, publicKey, salt } = await retrieveKey(myID == to_id ? from_id : to_id, keyID);
+    
+                // compute shared secret between Alice and Bob
+                const sharedSecretKey = await deriveSharedSecretKey(privateKey, publicKey);
+    
+                console.log('sharedSecret:');
+                console.log(sharedSecretKey);
+    
+                // derive encryption keys using HKDF
+                const AESKey = await deriveAESGCMKey(sharedSecretKey, salt, 'CHAT_KEY_USER' + from_id + 'to' + to_id);
+    
+                console.log('AESKey: ');
+                console.log(AESKey);
+    
+                // derive MAC keys using HKDF
+                const MACKey = await deriveMACKey(sharedSecretKey, salt, 'CHAT_MAC_USER' + from_id + 'to' + to_id);
+                return { AESKey, MACKey };
+            }
+    
+            // derive AES - GCM key with HKDF
+            async function deriveAESGCMKey(sharedSecretKey, salt, info) {
+                const encoder = new TextEncoder();
+                const saltBuffer = encoder.encode(salt); // Convert salt to ArrayBuffer
+    
+                const aesKey = await window.crypto.subtle.deriveKey(
+                    {
+                        name: 'HKDF',
+                        hash: 'SHA-256',
+                        salt: saltBuffer, // Use the salt as ArrayBuffer
+                        info: encoder.encode(info), // Convert info to ArrayBuffer
+                    },
+                    sharedSecretKey,
+                    {
+                        name: 'AES-GCM',
+                        length: 256,
+                    },
+                    true,
+                    ['encrypt', 'decrypt']
+                );
+    
+                return aesKey;
+            }
+    
+            // derive MAC key with HKDF
+            function deriveMACKey(sharedSecret, salt, info) {
+                return window.crypto.subtle.deriveKey(
+                    {
+                        name: 'HKDF',
+                        hash: 'SHA-256',
+                        salt: new TextEncoder().encode(salt),
+                        info: new TextEncoder().encode(info),
+                    },
+                    sharedSecret,
+                    {
+                        name: 'HMAC',
+                        hash: 'SHA-256',
+                        length: 256,
+                    },
+                    true,
+                    ['sign', 'verify']
+                );
+            }
+    
+    
+            // Refresh Keys function placeholder
+            async function refreshKeys() {
+                if (peer_id == -1) return console.log("Select a peer first")
+                let keyCount = localStorage.getItem(peer_id + "-keycount")
+                let PK = JSON.parse(localStorage.getItem(peer_id + "-" + keyCount));
+                PK.salt = PK.salt + 1;
+                localStorage.setItem(peer_id + "-" + ++keyCount, JSON.stringify(PK));
+                localStorage.setItem(peer_id + "-keycount", keyCount);
+                fetch("/exchange_refrash_key", {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        ...(await encryptFunction(peer_id, "change")),
+                        salt: PK.salt,
+                        receiver_id: peer_id
+                    }),
+                    headers: { "Content-Type": "application/json" }
+                }).then(() => {
+                    displayMessage({
+                        sender_id: myID,
+                        receiver_id: peer_id,
+                        message_text: "Key changed"
+                    })
+                })
+            }
+    
+            // Populate users function
+            function populateUsers(users) {
+                const userListDropdown = document.getElementById("userList");
+                users.forEach(user => {
+                    const option = new Option(user[1], user[0]); // username as text, user_id as value
+                    userListDropdown.add(option);
+                });
+            }
+    
+            // Fetch users from server
+            $(document).ready(function () {
+                fetch('/users')
+                    .then(response => response.json())
+                    .then(data => {
+                        data.users.forEach(user => {
+                            userInfo[user[0]] = user[1]; // Map user_id to username 
+                        });
+                        populateUsers(data.users);
+                    })
+                    .catch(error => console.error('Error fetching user info:', error));
+    
+                function repeat_exchange_key() { // Exchange key every second to check if there is any new key to be exchanged or received from other users
+                    fetch("/exchange_key_receive")
+                        .then(response => response.json())
+                        .then(async data => {
+                            for (const [receiver_id, receiver_stuff] of Object.entries(data)) {
+                                const receiver_key = receiver_stuff.publickey;
+                                const receive_salt = receiver_stuff.salt;
+                                console.log("Receive public key request", receiver_id, receiver_key, receive_salt)
+                                let key_counter = localStorage.getItem(receiver_id + "-keycount") || 0;
+    
+                                if (localStorage.getItem(receiver_id + "-" + key_counter) != null &&
+                                    JSON.parse(localStorage.getItem(receiver_id + "-" + key_counter)).senderPublicKey == null &&
+                                    JSON.parse(localStorage.getItem(receiver_id + "-" + key_counter)).publicKey != null) {
+                                    // Store received public key and stop loop
+                                    localStorage.setItem(receiver_id + "-" + key_counter, JSON.stringify({
+                                        ...JSON.parse(localStorage.getItem(receiver_id + "-" + key_counter)),
+                                        senderPublicKey: receiver_key,
+                                        salt: receive_salt
+                                    }))
+                                    console.log("Finish key exchange with", receiver_id)
+                                } else {
+                                    // Gen self public key & private key
+                                    // Store received public key and send back to self public key to him/her
+                                    const publicKey = await generateKey(receiver_id, receive_salt);
+                                    key_counter++;
+                                    localStorage.setItem(receiver_id + "-" + key_counter, JSON.stringify({
+                                        ...JSON.parse(localStorage.getItem(receiver_id + "-" + key_counter)),
+                                        senderPublicKey: receiver_key
+                                    }))
+                                    console.log("Sending", receiver_id, "with my public key", publicKey)
+                                    fetch('/exchange_key', {
+                                        method: 'POST',
+                                        body: JSON.stringify({
+                                            user_id: myID,
+                                            receiver_id: receiver_id,
+                                            publickey: publicKey,
+                                            salt: receive_salt
+                                        }),
+                                        headers: { "Content-Type": "application/json" }
+                                    })
+                                        .then(response => response.json())
+                                }
+                            }
+                            setTimeout(repeat_exchange_key, 1000);
+                        })
+                }
+                repeat_exchange_key(); // Repeat the function every second to check for new keys    
+    
+            
+                function repeat_refresh_key() { // Refresh key every second to check if there is any new key to be exchanged or received from other users
+                    fetch("/exchange_refrash_key_receive").then(res => res.json()).then(async data => {
+                        for (const [receiver_id, receiver_stuff] of Object.entries(data)) { // Loop through the received data from the server
+                            let keyCount = localStorage.getItem(receiver_id + "-keycount");
+                            let PK = JSON.parse(localStorage.getItem(receiver_id + "-" + keyCount));
+                            PK.salt = receiver_stuff.salt;
+                            localStorage.setItem(receiver_id + "-" + ++keyCount, JSON.stringify(PK));
+                            localStorage.setItem(receiver_id + "-keycount", keyCount);
+                            const result = await decryptFunction(receiver_id, myID, receiver_stuff.ciphertext, receiver_stuff.iv, receiver_stuff.signature)
+                            if (result == "change") {
+                                displayMessage({
+                                    sender_id: peer_id,
+                                    receiver_id: myID,
+                                    message_text: "Key changed"
+                                })
+                            } else {
+                                console.log("Incorrect decrypted message")
+                            }
+                        }
+                        setTimeout(repeat_refresh_key, 1000); // Repeat the function every second to check for new keys
+                    })
+                }
+    
+                repeat_refresh_key();
+            });
+    
+            // Handle user selection change
+            document.getElementById('userList').addEventListener('change', async event => {
+                peer_id = parseInt(event.target.value, 10); // Convert selected peer_id to integer
+                clearChatBox();
+                lastMessageId = 0;
+                fetchMessages(); // Fetch messages for the new selection
+                if (localStorage.getItem(peer_id + "-keycount") == null) {
+                    const salt = 1;
+                    console.log("Missing key with user", peer_id, ", initiating exchange key process")
+                    fetch('/exchange_key', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            user_id: myID,
+                            receiver_id: peer_id,
+                            publickey: await generateKey(peer_id),
+                            salt: salt
+                        }),
+                        headers: { "Content-Type": "application/json" }
+                    })
+                        .then(response => response.json())
+                } else {
+                    console.log("Switching chat to", peer_id, ", key exchanged")
+                }
+            });
+    
+            // Clear chat box
+            function clearChatBox() {
+                document.getElementById('messages').innerHTML = '';
+            }
+    
+            // Fetch messages from server
+            function fetchMessages() {
+                if (peer_id === -1) return; // Exit if no peer selected
+                fetch(`/fetch_messages?last_message_id=${lastMessageId}&peer_id=${peer_id}`)
+                    .then(response => response.json())
+                    .then(async data => {
+                        for (const messageIndex in data.messages) {
+                            let message = data.messages[messageIndex]
+                            message.message_text = await decryptFunction(message.sender_id, message.receiver_id, message.message_text, message.iv, message.signature)
+                            displayMessage(message);
+                            lastMessageId = message.message_id;
+                        }
+                    })
+                    .catch(error => console.error('Error fetching messages:', error));
+            }
+    
+            // Display a single message
+            function displayMessage(message) {
+                const messagesContainer = document.getElementById('messages');
+                const messageElement = document.createElement('div');
+    
+                // Determine sender and receiver strings
+                const sender = message.sender_id == myID ? "me" : (userInfo[message.sender_id] || `User ${message.sender_id}`);
+                const receiver = message.receiver_id == myID ? "me" : (userInfo[message.receiver_id] || `User ${message.receiver_id}`);
+    
+                messageElement.textContent = `From ${sender} to ${receiver}: ${message.message_text}`;
+                messagesContainer.appendChild(messageElement);
+            }
+    
+            // Periodically fetch new messages every second
+            setInterval(fetchMessages, 1000);
+    
+            // Erase Chat function using fetch API
+            function eraseChat() {
+                if (peer_id === -1) return; // Exit if no peer selected
+                if (!confirm('Are you sure you want to erase the chat with ' + userInfo[peer_id] + '?')) return; // Confirmation before erasing
+    
+                fetch(`/erase_chat`, {
+                    method: 'POST',  // A REST API should use POST if it leads to modifications
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ peer_id: peer_id })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json(); // Assuming the server responds with JSON
+                    })
+                    .then(data => {
+                        console.log('Chat erased:', data);
+                        clearChatBox(); // Clear the chat display
+                    })
+                    .catch(error => {
+                        console.error('Error erasing chat:', error);
+                    });
+            }
+            //Use the current counter to generate the salt
+            function generateSalt() {
+                let salt = new TextEncoder().encode(counter.toString());
+                return salt;
+            }
+            //Use the current counter to generate the iv
+            function generateIV(peer_id) {
+                let iv = new ArrayBuffer(12);
+                let keyID = parseInt(localStorage.getItem(peer_id + "-keycount"))
+                new DataView(iv).setUint32(0, decryptCounter[peer_id + "-" + keyID], true);
+                return iv;
+            }
+            //Get the Message and Encode.
+            function encodeText(message) {
+                let enco = new TextEncoder();
+                return enco.encode(message);
+            }
+    
+            async function encryptFunction(peer_id, message) {  // Encrypt the message
+                console.log("My ID is", myID, "Chatting with user", peer_id, "message", message)
+                const { AESKey, MACKey } = await shareKey(myID, peer_id);
+                const iv = generateIV(peer_id);
+    
+                const encryptedMessage = await window.crypto.subtle.encrypt( // Encrypt the message and using AES in Galois Counter Mode
+                    {
+                        name: "AES-GCM",
+                        iv,
+                        additionalData: encodeText("CHAT_MSG_USER" + myID + "to" + peer_id),
+                        tags: 128
+                    },
+                    AESKey,
+                    encodeText(message)
+                )
+    
+                const signature = await window.crypto.subtle.sign({ name: "HMAC" }, MACKey, iv);    // Sign the message
+                console.log(encryptedMessage, iv, signature)
+                return { encryptedMessage: bufferToBase64(encryptedMessage), iv: bufferToBase64(iv), signature: bufferToBase64(signature) };    
+            }
+    
+            async function decryptFunction(from, to, encryptedMessageB64, ivB64, signatureB64) { // Decrypt the message
+                const encryptedMessage = await base64ToBuffer(encryptedMessageB64);
+                const iv = await base64ToBuffer(ivB64);
+                const signature = await base64ToBuffer(signatureB64);
+                console.log("Decrypting msg from", from, "to", to)
+                console.log(encryptedMessage, iv, signature)
+                for (let i = 1; i <= parseInt(localStorage.getItem(peer_id + "-keycount")); i++) {
+                    const { AESKey, MACKey } = await shareKey(from, to, i);
+                    const isValid = await window.crypto.subtle.verify({ name: "HMAC" }, MACKey, signature, iv); // Verify the signature
+                    console.log("MACKey: ", MACKey, "Signature", arrayBufferToText(signature), "iv", arrayBufferToText(iv))
+                    if (isValid) {  // If the signature is valid, decrypt the message
+                        const decoder = new TextDecoder();
+                        const message = decoder.decode(await window.crypto.subtle.decrypt({ name: "AES-GCM", iv, additionalData: encodeText("CHAT_MSG_USER" + from + "to" + to) }, AESKey, encryptedMessage));
+                        if (decryptCounter[peer_id + "-" + i] == null)
+                            decryptCounter[peer_id + "-" + i] = 1
+                        else decryptCounter[peer_id + "-" + i] += 1
+                        return message;
+                    }
+                }
+                return "Fail to decrypt message.";
+            }
+    
+            function bufferToBase64(buf) { // Convert ArrayBuffer to Base64
+                let binary = '';
+                const bytes = new Uint8Array(buf);
+                const len = bytes.byteLength;
+    
+                for (let i = 0; i < len; i++) {
+                    binary += String.fromCharCode(bytes[i]);
+                }
+    
+                return window.btoa(binary);
+            }
+    
+            function base64ToBuffer(base64) {  // Convert Base64 to ArrayBuffer
+                let str = 'data:application/octet-stream;base64,' + base64;
+                return fetch(str).then(b => b.arrayBuffer())
+            }
+    
+            function arrayBufferToText(arrayBuffer) {
+                // Create a new DataView on top of the ArrayBuffer.
+                const view = new DataView(arrayBuffer);
+    
+                // Initialize an empty string to accumulate the hex values.
+                let hexStr = '';
+    
+                // Loop over each byte in the DataView.
+                for (let i = 0; i < view.byteLength; i++) {
+                    // Get the unsigned byte at the current position.
+                    const byte = view.getUint8(i);
+    
+                    // Convert the byte to a hexadecimal string and pad with a leading zero if necessary.
+                    hexStr += byte.toString(16).padStart(2, '0');
+                }
+    
+                return hexStr;
+            }
+        </script>
+</body>
+</html>
