@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Page</title>
+  <link href="https://fonts.googleapis.com/css?family=Joti+One" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/main.css" /> 
+  <link rel="stylesheet" type="text/css" href="css/login.css" /> 
+</head>
+<body>
+  <header>
+    <h1 style="padding-left: 10px;"><a href="home.html"><img src="images/CAT_LOGO.png" height="100px"></a></h1>
+    <nav>
+      <div class="navTop">
+        <div id="hasLogin" style="display: none;">
+          <p>Welcome! Issac Lee.</p>
+        </div>
+        <div id="noLogin">
+          <div class="changeLang">
+            <a href="#"><img src="images/lang.svg" class="changeLangIcon"> English</a>
+          </div>
+          <a href="index.html"><button class="signin-button">Sign In</button></a>
+        </div>
+        <div class="dropdown navigationDropDown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Navigation
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="home.html">Home</a></li>
+            <li><a class="dropdown-item" href="about.html">About</a></li>
+            <li><a class="dropdown-item" href="services.html">Service</a></li>
+            <li><a class="dropdown-item" href="event.html">Event</a></li>
+            <li><a class="dropdown-item" href="booking.html">Booking</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <ul class="listMenu">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Service</a></li>
+        <li><a href="event.html">Event</a></li>
+        <li><a href="booking.html">Booking</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div>
+    <form align="center">
+      <h1 class="title">Account Register</h1>
+		<label for="username">Register Username:</label>
+		<input type="text" id="username" name="username" placeholder="Enter username">
+		<label for="username">Register Email:</label>
+		<input type="text" id="email" name="email" placeholder="Enter email">
+		<label for="yourname">Your Name:</label>
+		<input type="text" id="yourname" name="yourname" placeholder="Enter Your Name">
+		<label for="password">Register Password:</label>
+		<input type="password" id="password" name="password" placeholder="Enter password">
+		<br>
+		<input type="button" onclick="javascript:alert('Register Successfully.');window.location.href='index.html'" value="Register">
+        <div>
+        <table width="100%">
+            <tr>
+                <td align="left">
+                    <a href="index.html">You already have an account?</a>
+                </td>
+        </tr>
+        </table>
+    </div>
+	</form>
+</div>
+  </body>
+  <footer>
+
+    <div class="grid-container">
+        <div class="grid-item">
+          <p><a class="footer_n_h" href="#">About</a></p>
+          <p><a href="about.html#webBlock1">The Goals</a></p>
+          <p><a href="about.html#webBlock2">Professional teams</a></p>
+          <p><a href="about.html#webBlock3">Contact Us</a></p>
+          <p><a href="about.html#webBlock4">Branch</a></p>
+          <p><a href="about.html#webBlock5">Comments</a></p>
+      </div>
+      <div class="grid-item">
+          <p><a class="footer_n_h" href="#">Service</a></p>
+          <p><a href="services.html">Homestay Services</a></p>
+          <p><a href="services.html">Beauty Services</a></p>
+          <p><a href="services.html">Food Services</a></p>
+          <p><a href="services.html">Sports Services</a></p>
+      </div>
+      <div class="grid-item">
+          <p><a class="footer_n_h" href="#">Event</a></p>
+          <p><a href="event.html">Membership recruit</a></p>
+          <p><a href="event.html">Sporty ticket</a></p>
+          <p><a href="event.html">Afternoon tea party</a></p>
+          <p><a href="event.html">Beauty ticket</a></p>
+          <p><a href="event.html">Care Pet Hotel x SPCA adoption day</a></p>
+          <p><a href="event.html">Pink cherry blossoms</a></p>
+      </div>
+      <div class="grid-item">
+          <p><a class="footer_n_h" href="#">Booking</a></p>
+          <p><a href="booking.html">Homestay</a></p>
+          <p><a href="booking.html">Beauty</a></p>
+          <p><a href="booking.html">Birthday</a></p>
+          <p><a href="booking.html">Sporty</a></p>
+      </div>
+</div>
+    <div class="icon-container">
+        <div class="icon-item">
+        <img src="images/fb.svg">
+        </div>
+        <div class="icon-item">
+            <img src="images/ig.svg">
+        </div>
+        <div class="icon-item">
+            <img src="images/twitter.svg">
+        </div>
+        <div class="icon-item">
+            <img src="images/yt.svg">
+        </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
+  <script>init();</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+/* Default styles for all screen sizes */
+.panel{
+  background-color: #F8F1F1;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 3%;
+  width:60%;
+}
+
+.panel-container{
+  padding: 1%;
+  display: grid;
+  grid-template-columns: 25% 75%;
+  margin-top: 0.5%;
+}
+
+.panel-item img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+.panel-item{
+  position: relative;
+  padding: 0 4% 0 4%;
+  justify-content: center;
+}
+  
+.text-background{
+  background-color: #0E6BF6;
+  color: #FFFFFF;
+  font-size: 150%;
+  margin-top:0 auto;
+  padding-right: 10%;
+  padding-left:10%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Styles for smaller screens */
+@media screen and (max-width: 768px) {
+
+  .text-background{
+    background-color: #0E6BF6;
+    color: #FFFFFF;
+    font-size: 110%;
+    margin-top:0 auto;
+    padding-right: 10%;
+    padding-left:10%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .panel {
+    width: 80%;
+  }
+  
+  .panel-container {
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+  }
+  
+  .panel-item{
+    display: block;
+    margin: 0 auto;
+  }
+
+  .text-background{
+    display: block;
+    margin: 0 auto;
+  }
+
+  .rec-button {
+    display: block;
+    margin: 0 auto;
+  }
+
+}
+
+
+  
+  .dater{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .rec-button{
+    background-color: #FFFFFF;
+    text-align: center; 
+    padding: 2%;
+    border: 2px solid #000000;
+    
+  }
+  
+  .rec-button:active{
+    background-color:#DDDDDD;
+  }
+  
+  .show-button{
+    background-color: #FFFFFF;
+    text-align: center;
+    padding-top:0.5em;
+    padding-bottom:1%;
+    padding-left:3%;
+    padding-right:3%;
+    border: 1%;
+    border-color:#000000;
+    margin: 0 auto;
+    display: block;
+    margin-top: 5%;
+    font-size: 150%;
+    font-family: Josefin Sans;
+  }
+  
+  .show-button:active{
+    background-color:#DDDDDD;
+  }

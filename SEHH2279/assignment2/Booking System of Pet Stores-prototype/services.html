@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services Page</title>
+  <link href="https://fonts.googleapis.com/css?family=Joti+One" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/main.css" /> 
+  <link rel="stylesheet" type="text/css" href="css/services.css" /> 
+</head>
+<body>
+  <header>
+    <h1 style="padding-left: 10px;"><a href="home.html"><img src="images/CAT_LOGO.png" height="100px"></a></h1>
+    <nav>
+      <div class="navTop">
+        <div id="hasLogin" style="display: none;">
+          <p>Welcome! Issac Lee.</p>
+        </div>
+        <div id="noLogin">
+          <div class="changeLang">
+            <a href="#"><img src="images/lang.svg" class="changeLangIcon"> English</a>
+          </div>
+          <a href="index.html"><button class="signin-button">Sign In</button></a>
+        </div>
+        <div class="dropdown navigationDropDown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Navigation
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="home.html">Home</a></li>
+            <li><a class="dropdown-item" href="about.html">About</a></li>
+            <li><a class="dropdown-item" href="services.html">Service</a></li>
+            <li><a class="dropdown-item" href="event.html">Event</a></li>
+            <li><a class="dropdown-item" href="booking.html">Booking</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <ul class="listMenu">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Service</a></li>
+        <li><a href="event.html">Event</a></li>
+        <li><a href="booking.html">Booking</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div>
+  <img width="100%" src="images/services_dog.png">
+    <div class="container mb-4">
+      <div class="row justify-content-md-center">
+        <div class="col-md-auto selection" style="width:20%;">
+          <button class="type-select-grid-item selected" id="all" style="margin:5%;" onclick="selectTypeOnClick(this);" name="selectedType" href="#">All</button>
+        </div>
+        <div class="col-md-auto selection" style="width:20%;">
+          <button class="type-select-grid-item" id="homestay" style="margin:5%;" onclick="selectTypeOnClick(this);" href="#">Homestay</button>
+        </div>
+        <div class="col-md-auto selection" style="width:20%;">
+          <button class="type-select-grid-item" id="beauty" style="margin:5%;" onclick="selectTypeOnClick(this);" href="#">Beauty</button>
+        </div>
+        <div class="col-md-auto selection" style="width:20%">
+          <button class="type-select-grid-item" id="food" style="margin:5%;" onclick="selectTypeOnClick(this);" href="#">Food</button>
+        </div>
+        <div class="col-md-auto selection" style="width:20%;">
+          <button class="type-select-grid-item" id="sporty" style="margin:5%;" onclick="selectTypeOnClick(this);" href="#">Sporty</button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div id="blockForHomeStay" name="typeBlock" class="typeBlock">
+          <div class="col p-3 col-md-auto">
+            <div class="card" style="margin:0 auto; width: 18rem;">
+              <img src="images/pet-house.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title service-title">Pink Cherry Blossom</h5>
+                <p class="card-text">The theme of the room is pink and cherry blossom of your pet which is ...........................................</p>
+                <a href="#" class="border border-dark btn btn-light">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col p-3 col-md-auto">
+            <div class="card" style="margin:0 auto; width: 18rem;">
+              <img src="images/pet-house.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title service-title">Modern City</h5>
+                <p class="card-text">The theme of the room is bright and modern city of your pet which is very ....................</p>
+                <a href="#" class="border border-dark btn btn-light">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="blockForBeauty" name="typeBlock" class="typeBlock">
+          <div class="col p-3 col-md-auto">
+            <div class="card" style="margin:0 auto; width: 18rem;">
+              <img src="images/beauty-saloon.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title service-title">SPA</h5>
+                <p class="card-text">We are providing a comfortable SPA of your pet to let them relaxed. That is because relaxing is good ........ </p>
+                <a href="#" class="border border-dark btn btn-light">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col p-3 col-md-auto">
+            <div class="card" style="margin:0 auto; width: 18rem;">
+              <img src="images/beauty-saloon.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title service-title">Full Set Grooming</h5>
+                <p class="card-text">For our our beauty, we are providing a professional full set grooming by pet groomer which is including ..............................</p>
+                <a href="#" class="border border-dark btn btn-light">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="blockForFood" name="typeBlock" class="typeBlock">
+          <div class="col p-3 col-md-auto">
+            <div class="card" style="margin:0 auto; width: 18rem;">
+              <img src="images/pet-food.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title service-title">Cherry Blossom</h5>
+                <p class="card-text">The theme of the food in coffee shop is cherry blossom of customers and pets. All the theme foods are design in ......</p>
+                <a href="#" class="border border-dark btn btn-light">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col p-3 col-md-auto">
+            <div class="card" style="margin:0 auto; width: 18rem;">
+              <img src="images/pet-food.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title service-title">Main Coffee Shop</h5>
+                <p class="card-text">The biggest pet coffee shop is in our hotel. It provided a delicious, health and restrict food of customers and pets......</p>
+                <a href="#" class="border border-dark btn btn-light">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="blockForSporty" name="typeBlock" class="typeBlock">
+          <div class="col p-3 col-md-auto">
+            <div class="card" style="margin:0 auto; width: 18rem;">
+              <img src="images/dog-area.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title service-title">Indoor Swimming Pool</h5>
+                <p class="card-text">The new indoor swimming pool is opening in our hotel that can trainning your pet for their ..................................................</p>
+                <a href="#" class="border border-dark btn btn-light">Read More</a>
+              </div>
+            </div>
+          </div>
+          <div class="col p-3 col-md-auto">
+            <div class="card" style="margin:0 auto; width: 18rem;">
+              <img src="images/dog-area.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title service-title">Outdoor Playground</h5>
+                <p class="card-text">The new outdoor playground is opening in our hotel that your pet have a larger place to do more exercise ........................</p>
+                <a href="#" class="border border-dark btn btn-light">Read More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+  <footer>
+    <div class="grid-container">
+      <div class="grid-item">
+        <p><a class="footer_n_h" href="#">About</a></p>
+        <p><a href="about.html#webBlock1">The Goals</a></p>
+        <p><a href="about.html#webBlock2">Professional teams</a></p>
+        <p><a href="about.html#webBlock3">Contact Us</a></p>
+        <p><a href="about.html#webBlock4">Branch</a></p>
+        <p><a href="about.html#webBlock5">Comments</a></p>
+    </div>
+    <div class="grid-item">
+        <p><a class="footer_n_h" href="#">Service</a></p>
+        <p><a href="services.html">Homestay Services</a></p>
+        <p><a href="services.html">Beauty Services</a></p>
+        <p><a href="services.html">Food Services</a></p>
+        <p><a href="services.html">Sports Services</a></p>
+    </div>
+    <div class="grid-item">
+        <p><a class="footer_n_h" href="#">Event</a></p>
+        <p><a href="event.html">Membership recruit</a></p>
+        <p><a href="event.html">Sporty ticket</a></p>
+        <p><a href="event.html">Afternoon tea party</a></p>
+        <p><a href="event.html">Beauty ticket</a></p>
+        <p><a href="event.html">Care Pet Hotel x SPCA adoption day</a></p>
+        <p><a href="event.html">Pink cherry blossoms</a></p>
+    </div>
+    <div class="grid-item">
+        <p><a class="footer_n_h" href="#">Booking</a></p>
+        <p><a href="booking.html">Homestay</a></p>
+        <p><a href="booking.html">Beauty</a></p>
+        <p><a href="booking.html">Birthday</a></p>
+        <p><a href="booking.html">Sporty</a></p>
+    </div>
+</div>
+    <div class="icon-container">
+        <div class="icon-item">
+        <img src="images/fb.svg">
+        </div>
+        <div class="icon-item">
+            <img src="images/ig.svg">
+        </div>
+        <div class="icon-item">
+            <img src="images/twitter.svg">
+        </div>
+        <div class="icon-item">
+            <img src="images/yt.svg">
+        </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script src="js/services.js"></script>
+  <script src="js/main.js"></script>
+  <script>init();</script>
+</body>
+</html>

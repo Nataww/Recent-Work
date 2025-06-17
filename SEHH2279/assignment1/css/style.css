@@ -1,0 +1,1346 @@
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+        text-decoration: none;
+        border: none;
+        outline: none;
+    }
+
+    body{
+        background: #FEFCF3;
+        color: #black;
+        font-family: Trebuchet MS;
+
+    }
+
+    html{
+        font-size: 62.5%;
+        overflow-x: hidden;
+    }
+
+    /* navbar starts */ 
+    .header{
+        position: fixed;
+        top:0;
+        left: 0;
+        width: 100%;
+        padding: 20px 9%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        background: #F5EBE0;
+    }
+
+    .logo{
+        font-size: 40px;
+        font-weight: 600;
+        cursor: default;
+        color: #A7727D;
+        font-family: Brush Script MT;
+    }
+
+    .navbar a{
+        font-size: 20px;
+        margin-left: 4rem;
+        transition: .3s;
+        color: #A7727D;
+    }
+
+    .navbar a:hover{
+        color: #F5EBE0;
+    }
+
+/* navbar ends */ 
+
+/* section starts */ 
+    section{
+        width:100px;
+        margin: 80px auto;
+    }
+/* section ends */ 
+
+/* home starts */ 
+    #home{
+        width:100%;
+        height: 700px;
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        background-image: url("../images/workplace_5.jpg");
+        background-blend-mode: darken;
+        background-position: bottom;
+        background-size: cover;
+        margin-bottom: 0px;
+    }
+
+    #home .content{
+        text-align: center;
+        color: white;
+        margin: 20px 60px;
+        padding: 15px 25vh;
+    }
+
+    #home .content h1{
+        font-style: bold;
+        font-size: 60px;
+    }
+
+    #home .content p{
+        font-size: 30px;
+        margin: 10px auto;
+    }
+/* home ends */ 
+
+/* About Us starts */
+    #about{
+        width:100%;
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        background: #F9F5E7;
+        margin: 0px;
+    }
+
+    #about .content{
+        text-align: center;
+        margin: 20vh 10px; 
+        padding: 15px 30vh;
+    }
+
+    #about .content h3{
+        font-size: 70px;
+        margin-bottom:5vh;
+        color: #A7727D;
+    }
+
+    #about .content p{
+        font-size: 20px;
+        margin: 10px auto;
+        line-height: 2;
+        color: #D0B8A8;
+    }
+/* about ends */ 
+
+/* stylist starts */ 
+    #stylist{
+        width: 100%;
+        margin: 0; 
+    }
+
+    #stylist .content{
+        text-align: center;
+        margin: 5vh auto;
+    }
+
+    #stylist .content h1{
+        text-align: center;
+        font-size: 70px;
+        color: #A7727D;
+    }
+
+    #stylist .container {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(350px, 350px));
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    #stylist .box{
+        position:relative;
+        margin: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #stylist .box_image{
+        width: 300px;
+        height: 300px;
+    }
+
+    #stylist .box_image img{
+        width: 100%;
+        height: 100%;
+    }
+
+    #stylist .box_content{
+        text-align: center;
+    }
+
+    #stylist .box_content h2{
+        font-size: 40px;
+        margin: 15px auto;
+        color: #A7727D;
+
+    }
+
+    #stylist .box_content p{
+        font-size: 16px;
+        margin: 10px auto;
+        line-height: 1.5;
+        color: #D0B8A8;
+
+    }
+/* stylist ends */
+
+/* portfolio starts */ 
+    #portfolio{
+        width: 100%;
+        margin: 0; 
+        background: #F9F5E7;
+    }
+
+    #portfolio .content{
+        text-align: center;
+        margin: 5vh auto;
+    }
+
+    #portfolio .content h1{
+        text-align: center;
+        font-size: 70px;
+        color: #A7727D;
+    }
+
+    #portfolio .container {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(350px, 350px));
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #portfolio .box{
+        position:relative;
+        margin: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #portfolio .box_image{
+        width: 300px;
+        height: 300px;
+    }
+
+    #portfolio .box_image img{
+        width: 100%;
+        height: 100%;
+    }
+
+    #portfolio .button{
+        text-align: center;
+    }
+
+    #portfolio .button button{
+        text-align: center;
+        width: 350px;
+        height: 70px;
+        margin: 20px auto;
+        font-size: 25px;
+        background: #F9F5E7;
+        color: #DBA39A;
+        border: 1px solid #DBA39A;
+        border-radius: 40px;
+    }
+
+    #portfolio .button button a{
+        color: #DBA39A;
+    }
+
+    #portfolio .button button a:hover{
+        color: #FEFCF3;
+    }
+/* portfolio ends */ 
+
+/* contact ends */ 
+    #contact{
+        width: 100%;
+        margin: 30px auto;
+    }
+
+    #contact .content{
+        text-align: center;
+        margin: 5vh auto; 
+    }
+
+    #contact .content h1{
+        font-size: 60px;
+        color: #A7727D;
+    }
+
+    #contact .container {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(400px, 400px));
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #contact .box{
+        position:relative;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: #F9F5E7;
+        padding: 20px 30px;
+        color: #D0B8A8;
+
+    }
+
+     #contact .box h2{
+        text-align: center;
+        font-size: 40px;
+    }
+
+    #contact .box p{
+        text-align: left;
+        font-size: 20px;
+        margin: 5px 5px;
+    }
+
+    #contact .box button{
+        text-align: center;
+        width: 200px;
+        height: 40px;
+        margin: 20px auto;
+        font-size: 20px;
+        background: #F9F5E7;
+        color: #DBA39A;
+        border: 1.5px solid #DBA39A;
+        border-radius: 40px;
+        padding: 0px;
+    }
+
+    #contact .box button a{
+        color: #DBA39A;
+    }
+
+    #contact .box button a:hover{
+        color: #FEFCF3;
+    }
+
+    #contact .google_map{
+        position:relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background:  #F8F9F9;
+    }
+/* contact ends */
+
+/* --------------------Price website------------------------------*/
+
+/* workplace_1 starts */ 
+    #workplace_1{
+        width:100%;
+        height: 700px;
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        background-image: url("../images/workplace_3.jpg");
+        background-blend-mode: darken;
+        background-position: bottom;
+        background-size: cover;
+        margin-bottom: 0px;
+    }
+/* workplace_1 ends */ 
+
+/* service starts */ 
+    #service{
+        width: 100%;
+        margin: 0; 
+    }
+
+    #service .content{
+        text-align: center;
+        justify-content: center;
+    }
+
+    #service .content h1{
+        text-align: center;
+        font-size: 70px;
+        color: #A7727D;
+    }
+
+    #service .container {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(350px, 350px));
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #service .box{
+        position:relative;
+        margin: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #service .box_image{
+        width: 300px;
+        height: 300px;
+    }
+
+    #service .box_image img{
+        width: 100%;
+        height: 100%;
+    }
+
+    #service .box_content{
+        text-align: center;
+    }
+
+    #service .box_content h2{
+        font-size: 40px;
+        margin: 15px auto;
+        color: #A7727D;
+    }
+
+    #service .box_content p{
+        font-size: 16px;
+        margin: 10px auto;
+        line-height: 1.5;
+        color: #D0B8A8;
+    }
+/* service ends */ 
+
+/* prices ends */ 
+    #prices{
+        width: 100%;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #prices .content h1{
+        text-align: center;
+        font-size: 70px;
+        margin: 20px auto;
+        color: #A7727D;
+    }
+
+    #prices .container{
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        margin: 10vh 15vh;
+    }
+
+    #prices .table{
+        max-width: 100%;
+        border: 1px solid #A7727D;;
+    }
+
+    #prices table{
+        margin: auto;
+        
+    }
+
+    #prices td{ 
+        padding: 10px 10vh;
+    }
+
+    #prices .title{
+        font-size: 30px;
+        margin: 10px;
+        color: #A7727D;
+    }
+
+    #prices .table_content {
+        font-size: 20px;
+    }
+
+    #prices .table_content td .type{
+        text-align: left;
+        color: #D0B8A8;
+    }
+
+    #prices .table_content td .price{
+        text-align: right;
+        color: #D0B8A8;
+    }
+/* prices ends */
+
+
+/* enquiry starts */
+    #enquiry{
+        width:100%;
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        margin: 0px;
+        background: #F9F5E7;
+    }
+
+    #enquiry .content{
+        text-align: center;
+        margin: 10vh 10px; 
+        padding: 15px 30vh;
+    }
+
+    #enquiry .content h3{
+        font-size: 70px;
+        margin-bottom:5vh;
+        color: #A7727D;
+    }
+
+    #enquiry .content p{
+        font-size: 20px;
+        margin: 10px auto;
+        line-height: 2;
+        color: #D0B8A8;
+    }
+
+
+    #enquiry a button{
+        text-align: center;
+        background: #F9F5E7;
+        width: 200px;
+        height: 50px;
+        margin: 20px auto;
+        font-size: 25px;
+        color: #DBA39A;
+        border: 1px solid #DBA39A;
+        border-radius: 40px;
+    }
+/* enquiry ends */
+
+/* -------------------- Covid 19 website------------------------------*/
+
+    /* workplace_2 starts */ 
+        #workplace_2{
+            width:100%;
+            height: 700px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            background-image: url("../images/workplace_4.jpg");
+            background-blend-mode: darken;
+            background-position: bottom;
+            background-size: cover;
+            margin-bottom: 0px;
+        }
+    /* workplace_2 ends */
+
+/* precaution starts */
+    #precaution{
+        width:100%;
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        background: #F9F5E7;
+        margin: 0px;
+    }
+
+    #precaution .content{
+        text-align: center;
+        margin: 20vh 10px; 
+        padding: 15px 30vh;
+    }
+
+    #precaution .content h3{
+        font-size: 70px;
+        margin-bottom:5vh;
+        color: #A7727D;
+    }
+
+    #precaution .content p{
+        font-size: 20px;
+        margin: 10px auto;
+        line-height: 2;
+        color: #D0B8A8;
+    }
+/* precaution ends */
+
+
+/* guest starts */ 
+    #guest{
+        width: 100%;
+        margin: 0; 
+    }
+
+    #guest .content{
+        text-align: center;
+        margin: 5vh auto;
+    }
+
+    #guest .content h1{
+        text-align: center;
+        font-size: 70px;
+        color: #A7727D;
+    }
+
+    #guest .container {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(350px, 350px));
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #guest .box{
+        position:relative;
+        margin: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #guest .box_image{
+        width: 300px;
+        height: 300px;
+    }
+
+    #guest .box_image img{
+        width: 100%;
+        height: 100%;
+    }
+
+    #guest .box_content{
+        text-align: center;
+    }
+
+    #guest .box_content h2{
+        font-size: 40px;
+        margin: 15px auto;
+        color: #A7727D;
+
+    }
+
+    #guest .box_content p{
+        font-size: 16px;
+        margin: 10px auto;
+        line-height: 1.5;
+        color: #D0B8A8;
+
+    }
+/* guest ends */
+
+/* staff_safety starts */ 
+    #staff_safety{
+        width: 100%;
+        margin: 0; 
+        background: #F9F5E7;
+    }
+
+    #staff_safety .content{
+        text-align: center;
+        margin: 5vh auto;
+    }
+
+    #staff_safety .content h1{
+        text-align: center;
+        font-size: 70px;
+        color: #A7727D;
+    }
+
+    #staff_safety .container {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(350px, 350px));
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #staff_safety .box{
+        position:relative;
+        margin: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #staff_safety .box_image{
+        width: 300px;
+        height: 300px;
+    }
+
+    #staff_safety .box_image img{
+        width: 100%;
+        height: 100%;
+    }
+
+    #staff_safety .box_content{
+        text-align: center;
+    }
+
+    #staff_safety .box_content h2{
+        font-size: 40px;
+        margin: 15px auto;
+        color: #A7727D;
+    }
+
+    #staff_safety .box_content p{
+        font-size: 16px;
+        margin: 10px auto;
+        line-height: 1.5;
+        color: #D0B8A8;
+
+    }
+/* staff_safety ends */
+
+/* newsletter starts */
+    #newsletter{
+        width:100%;
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        margin: 0px;
+    }
+
+    #newsletter .content{
+        text-align: center;
+        margin: 10vh 10px; 
+        padding: 15px 30vh;
+    }
+
+    #newsletter .content h3{
+        font-size: 70px;
+        margin-bottom:5vh;
+        color: #A7727D;
+    }
+
+    #newsletter .content p{
+        font-size: 20px;
+        margin: 10px auto;
+        line-height: 2;
+        color: #D0B8A8;
+    }
+
+    #newsletter a button{
+        text-align: center;
+        background: #FEFCF3;;
+        width: 200px;
+        height: 50px;
+        margin: 20px auto;
+        font-size: 25px;
+        color: #DBA39A;
+        border: 1px solid #DBA39A;
+        border-radius: 40px;
+    }/* newsletter ends */
+
+/* booking system */
+    .booking {
+      margin: 10px auto;
+      text-align: center;
+      color:  #A7727D;
+      font-size: 20px;
+    }
+
+    form {
+      width: 60px;
+      max-width: 500px;
+      min-width: 300px;
+      margin: 0 auto;
+      padding-bottom: 20px;
+      color: #A7727D;
+      font-size: 15px;
+    }
+
+    label {
+      display: block;
+      margin: 5px 0;
+    }
+
+    input,
+    textarea,
+    select {
+      margin: 15px 0;
+      width: 100%;
+      min-height: 20px;
+    }
+
+    input, textarea {
+      background-color: #F9F5E7;
+      border: 1px solid #F9F5E7;
+      color: #ffffff;
+    }
+
+    input[type="submit"] {
+      display: block;
+      width: 60%;
+      margin: 10px auto;
+      height: 20px;
+      font-size: 10px;
+      background-color: #A7727D;
+      min-width: 300px;
+    }
+/* booking system */
+
+/* -------------------- footer ------------------------------*/
+
+
+/* footer starts */ 
+    #footer{
+        display: flex;
+        width: 100%;
+        height: 200px;
+        background: #F9F5E7;;
+        margin: 0px auto;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #footer .content{
+        margin: 20px;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        color: #A7727D;
+    }
+
+    #footer .content h1{
+       font-size: 30px;
+       margin: 10px auto;
+    }
+
+    #footer .content p{
+       font-size: 15px;
+       margin: 10px auto;
+    }
+
+    #footer .social_icon{
+        width: 30px;
+        height: 30px;
+    }
+/* footer ends */ 
+
+/* desktop view */
+@media only screen and (max-width: 1560px){
+    
+}
+
+/* tablet view */
+@media (max-width: 1100px){
+    
+     html{
+        font-size: 55%;
+     }
+
+    /* home section start*/
+    #home{
+        width: 100%;
+        max-height: 600px;
+    }
+
+    #home .content{
+        margin: 20px 80px;
+        padding: 15px 20vh;
+    }
+
+    #home .content h1{
+        font-size: 50px;
+    }
+
+     #home .content p{
+        font-size: 25px;
+        margin: 5px auto;
+    }
+    /* home section start*/
+
+    #about .content{
+        padding: 15px 10vh;
+    }
+
+    #stylist .container {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(350px, 350px));
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #stylist .box p {
+        padding: 15px auto;
+        margin: 10px auto;
+    }
+
+    #portfolio .container {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(350px, 350px));
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #portfolio .box_image{
+        width: 300px;
+        height: 300px;
+    }
+
+    #precaution .content{
+        padding: 15px 10vh;
+    }
+
+/* --------------------Price website------------------------------*/
+/* service starts */ 
+
+    #prices .content h1{
+        font-size: 50px;
+    }
+
+    #prices .container{
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        margin: 10vh 10vh;
+    }
+
+    #prices td{ 
+        padding: 10px 10vh;
+    }
+
+    #prices .title{
+        font-size: 20px;
+    }
+
+
+    #service .container {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(350px, 350px));
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #service .box p {
+        padding: 15px auto;
+        margin: 10px auto;
+    }
+
+    #guest .container {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(350px, 350px));
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #staff_safety .container {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(350px, 350px));
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #workplace_1{
+        width: 100%;
+        height: 600px;
+    }
+
+    #workplace_2{
+        width: 100%;
+        height: 600px;
+    }
+/* service ends */ 
+}
+
+/* mobile view */
+@media(max-width: 767px){
+    
+    header{
+        padding: 10rem 3% 2rem;
+    }
+
+    .navbar{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        background: #F9F5E7;
+        display: inline-block;
+     }
+
+     .navbar a{
+        display: inline;
+        font-size: 2rem;
+        margin: auto 20px;
+     }
+
+    /* home section start*/
+    #home{
+        width: 100%;
+        height: 300px;
+        margin-bottom: 0;
+    }
+
+    #home .content{
+        margin: 20px 50px;
+        padding: 15px 1vh;
+    }
+
+    #home .content h1{
+        font-size: 30px;
+    }
+
+     #home .content p{
+        font-size: 15px;
+        margin: 5px auto;
+    }
+    /* home section start*/
+
+    #about .content{
+        text-align: center;
+        margin: 10vh 10px; 
+        padding: 15px 5vh;
+    }
+
+    #about .content h3{
+        font-size: 40px;
+    }
+
+    #about .content p{
+        font-size: 15px;
+        margin: 5px auto;
+    }
+
+    /* home section start*/
+
+    #stylist .content{
+        text-align: center;
+        margin: 5vh 10px; 
+    }
+
+    #stylist .content h1{
+        font-size: 40px;
+    }
+
+    #stylist .box p{
+        font-size: 15px;
+        margin: 10px auto;
+        padding: 15px auto;
+    }
+
+    #stylist .box{
+        display: block;
+    }
+
+    #stylist .box_content h2{
+        font-size: 25px;
+    }
+
+    #stylist .box_content p{
+        font-size: 15px;
+    }
+
+    #stylist .box_image{
+        width: 200px;
+        height: 200px;
+        margin: auto;
+        display: block;
+    }
+
+    /* home section start*/
+
+    #portfolio .content h1{
+        font-size: 40px;
+    }
+
+    #portfolio .container {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(350px, 350px));
+        grid-gap: 1.5rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #portfolio .box_image{
+        width: 200px;
+        height: 200px;
+    }
+
+    #portfolio .button button{
+        width: 200px;
+        height: 50px;
+        font-size: 15px;
+    }
+
+
+    #contact .content h1{
+        font-size: 40px;
+    }
+
+    #contact .box h2{
+        font-size: 30px;
+    }
+
+    #contact .box p{
+        text-align: center;
+        font-size: 15px;
+        margin: 5px 5px;
+    }
+
+    #contact .container {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(350px, auto));
+        grid-gap: 1.5rem;
+        justify-content: center;
+    }
+    /* -------------------- Index website------------------------------*/
+/* --------------------Price website------------------------------*/
+/* service starts */
+
+    #workplace_1{
+        width: 100%;
+        height: 300px;
+        margin-bottom: 0;
+    }
+
+    #service .content{
+        text-align: center;
+        margin: auto 10px; 
+    }
+
+    #service .content h1{
+        font-size: 40px;
+    }
+
+    #service .box p{
+        font-size: 15px;
+        margin: 10px auto;
+        padding: 15px auto;
+    }
+
+    #service .box{
+        display: block;
+    }
+
+    #service .box_content h2{
+        font-size: 25px;
+    }
+
+    #service .box_content p{
+        font-size: 15px;
+    }
+
+    #service .box_image{
+        width: 200px;
+        height: 200px;
+        margin: auto;
+        display: block;
+    }
+/* service ends */
+
+    #prices .content h1{
+        font-size: 50px;
+    }
+
+    #prices .container{
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #prices td{ 
+        padding: 10px 3vh;
+    }
+
+    #prices .title{
+        font-size: 20px;
+    }
+
+    #enquiry .content{
+        text-align: center;
+        margin: 10vh 10px; 
+        padding: 15px 5vh;
+    }
+
+    #enquiry .content h3{
+        font-size: 40px;
+    }
+
+    #enquiry .content p{
+        font-size: 15px;
+        margin: 5px auto;
+    }
+
+    #enquiry a button{
+        text-align: center;
+        width: 150px;
+        height: 50px;
+        margin: 20px auto;
+        font-size: 15px;
+    }
+
+    #workplace_1{
+        width: 100%;
+        height: 300px;
+        margin-bottom: 0;
+    }
+
+
+/* -------------------- precaution website starts ------------------------------*/
+
+    #workplace_2{
+        width: 100%;
+        max-height: 300px;
+        margin-bottom: 0;
+    }
+    /* precaution starts */
+
+    #precaution .content{
+        text-align: center;
+        margin: 10vh 10px; 
+        padding: 15px 5vh;
+    }
+
+    #precaution .content h1{
+        font-size: 40px;
+    }
+
+    #precaution .content p{
+        font-size: 15px;
+        margin: 5px auto;
+    }
+     /* precaution ends */
+
+    /* guest starts */
+    #guest .content{
+        text-align: center;
+        margin: 5vh 10px; 
+    }
+
+    #guest .content h1{
+        font-size: 40px;
+    }
+
+    #guest .box p{
+        font-size: 15px;
+        margin: 10px auto;
+        padding: 15px auto;
+    }
+
+    #guest .box{
+        display: block;
+    }
+
+    #guest .box_content h2{
+        font-size: 25px;
+    }
+
+    #guest .box_content p{
+        font-size: 15px;
+    }
+
+    #guest .box_image{
+        width: 200px;
+        height: 200px;
+        margin: auto;
+        display: block;
+    }
+    /* guest ends */
+
+    /* staff_safety starts */
+    #staff_safety .content{
+        text-align: center;
+        margin: 1vh 10px; 
+    }
+
+    #staff_safety .content h1{
+        font-size: 40px;
+    }
+
+    #staff_safety .box p{
+        font-size: 15px;
+        margin: 10px auto;
+        padding: 15px auto;
+    }
+
+    #staff_safety .box{
+        display: block;
+    }
+
+    #staff_safety .box_content h2{
+        font-size: 25px;
+    }
+
+    #staff_safety .box_content p{
+        font-size: 15px;
+    }
+
+    #staff_safety .box_image{
+        width: 200px;
+        height: 200px;
+        margin: auto;
+        display: block;
+    }
+    /* staff_safety ends */
+
+    /* newsletter starts */
+
+    #newsletter .content{
+        text-align: center;
+        margin: 10vh 10px; 
+        padding: 15px 5vh;
+    }
+
+    #newsletter .content h3{
+        font-size: 40px;
+    }
+
+    #newsletter .content p{
+        font-size: 15px;
+        margin: 5px auto;
+    }
+
+    #newsletter a button{
+        text-align: center;
+        width: 150px;
+        height: 50px;
+        margin: 20px auto;
+        font-size: 15px;
+    }
+    /* newsletter ends */
+
+/* -------------------- precaution website ends ------------------------------*/
+
+@media(max-width:400px){
+
+    /* -------------------- Homepage website starts ---------------*/
+
+    /* -------------------- Homepage website ends ---------------*/
+
+    /* -------------------- price website starts ---------------*/
+
+    #prices .content h1{
+        font-size: 50px;
+        margin: 20px auto;
+    }
+
+    #prices .container{
+        margin: 10vh 2vh;
+    }
+
+    #prices td{ 
+        padding: 10px 2vh;
+        font-size: 15px;
+    }
+
+    #prices .title{
+        font-size: 25px;
+    }
+
+    .navbar a{
+        margin: auto 10px;
+     }
+
+    /* -------------------- price website ends ---------------*/
+
+}

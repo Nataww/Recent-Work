@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking System</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1 class="booking">Booking System</h1>
+    <p class="booking">Please fill out this form to make appointment</p>
+    <form method="post" action='wanhoinam@gmail.com'>
+        <label for="first_name">Enter First Name: <input id="first_name" name="first_name" type="text" required /></label>
+        <label for="last_name">Enter Last Name: <input id="last_name" name="last_name" type="text" required /></label>
+        <label for="email">Enter Email: <input id="email" name="email" type="email" required /></label>
+        <label for="service">What service do you want? 
+          <select id="service" name="service">
+            <option value="">(select one)</option>
+            <option value="1">Haircut</option>
+            <option value="2">Hair dying</option>
+            <option value="3">Cosmetics</option>
+            <option value="4">Nailing</option>
+          </select>
+        </label>
+        <label for="Specify">Specify what service do you want?
+          <textarea id="Specify" name="Specify" rows="3" cols="30" placeholder="Specify what service do you want? "></textarea>
+        </label>
+        <label for="time">When do you want the service? 
+          <select id="time" name="time">
+            <option value="">(select one)</option>
+            <option value="1">10:00 - 12:00</option>
+            <option value="2">13:00 - 15:00</option>
+            <option value="3">15:00 - 17:00</option>
+            <option value="4">17:00 - 19:00</option>
+            <option value="5">19:00 - 21:00</option>
+          </select>
+        </label>
+        <label for="approach">How did you hear about us?
+          <select id="approach" name="approach">
+            <option value="">(select one)</option>
+            <option value="1">Instagram</option>
+            <option value="2">Facebook</option>
+            <option value="3">Twitter</option>
+            <option value="4">Other</option>
+          </select>
+        </label>
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
