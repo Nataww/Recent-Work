@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=CashDispenser
+comment1.params=
+comment1.target=CashDispenser()
+comment2.params=amount
+comment2.target=void\ dispenseCash(int)
+comment3.params=amount
+comment3.target=boolean\ isSufficientCashAvailable(int)
+numComments=4

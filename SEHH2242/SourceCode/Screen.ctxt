@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Screen
+comment1.params=message
+comment1.target=void\ displayMessage(java.lang.String)
+comment2.params=message
+comment2.target=void\ displayMessageLine(java.lang.String)
+comment3.params=amount
+comment3.target=void\ displayDollarAmount(double)
+numComments=4

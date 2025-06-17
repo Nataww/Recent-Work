@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=TransferMoneyUserID
+comment1.params=getFileName
+comment1.target=TransferMoneyUserID(java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getTransferMoneyUserID()
+comment3.params=centerButton\ panel
+comment3.target=void\ screenCenter(javax.swing.JButton[],\ javax.swing.JPanel)
+comment4.params=
+comment4.target=void\ waiting()
+comment5.params=event
+comment5.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=6

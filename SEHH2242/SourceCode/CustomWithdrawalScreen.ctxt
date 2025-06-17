@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=CustomWithdrawalScreen
+comment1.params=getFileName
+comment1.target=CustomWithdrawalScreen(java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getAmount()
+comment3.params=
+comment3.target=void\ execute()
+comment4.params=centerButton\ panel
+comment4.target=void\ screenCenter(javax.swing.JButton[],\ javax.swing.JPanel)
+comment5.params=
+comment5.target=void\ waiting()
+comment6.params=event
+comment6.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=7

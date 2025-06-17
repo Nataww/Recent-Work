@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=ShowMessageScreen
+comment1.params=getFileName\ endChoice\ waitingSecond
+comment1.target=ShowMessageScreen(java.lang.String,\ boolean,\ int)
+comment2.params=getFileName\ endChoice\ waitingSecond\ runNext
+comment2.target=ShowMessageScreen(java.lang.String,\ boolean,\ int,\ java.lang.String)
+comment3.params=waitingMS
+comment3.target=void\ waitingThenNext(int)
+comment4.params=e
+comment4.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment5.params=
+comment5.target=void\ waiting()
+comment6.params=centerButton\ panel
+comment6.target=void\ screenCenter(javax.swing.JButton[],\ javax.swing.JPanel)
+comment7.params=event
+comment7.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=8
